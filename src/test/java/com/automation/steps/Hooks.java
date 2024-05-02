@@ -21,7 +21,7 @@ public class Hooks {
             environment = ConfigReaderUtils.getProperty("execution.platform");
         }
 
-        if(environment.equals("local")) {
+        if(environment.equalsIgnoreCase("local")) {
             DriverUtils.createLocalDriver();
         } else {
             DriverUtils.createBrowserStackDriver();
