@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 // keep here common methods for Flight and Stay search!!!
-public class SearchPage extends BasePage {
+public abstract class SearchPage extends BasePage {
 
     @FindBy(xpath = "//android.widget.TextView[@text = 'Select dates']")
     WebElement dateField;

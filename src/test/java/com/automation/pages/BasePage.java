@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.time.Duration;
 
-public class BasePage {
+public abstract class BasePage {
 
     protected AppiumDriver driver;
 

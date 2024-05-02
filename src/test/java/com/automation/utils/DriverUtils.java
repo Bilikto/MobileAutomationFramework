@@ -1,10 +1,8 @@
 package com.automation.utils;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
@@ -13,7 +11,6 @@ import java.util.HashMap;
 public class DriverUtils {
 
     private static AppiumDriver driver;
-//    private static AndroidDriver driver;
 
     public static void createLocalDriver() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -23,7 +20,6 @@ public class DriverUtils {
         capabilities.setCapability("appium:app", System.getProperty("user.dir") +"\\"+ ConfigReaderUtils.getProperty("apk.name"));
 
         driver = new AppiumDriver(capabilities);
-//        driver = new AndroidDriver(capabilities);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
     }
 
@@ -32,20 +28,19 @@ public class DriverUtils {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         HashMap<String, Object> browserstackOptions = new HashMap<String, Object>();
-        browserstackOptions.put("projectName", "ExpediaAutomation");
-        browserstackOptions.put("buildName", "RegressionTest");
-        browserstackOptions.put("userName", "biliktodashiev_2rj7Yh");
-        browserstackOptions.put("accessKey", "SSQoFKadYYZidkQusNvy");
+        browserstackOptions.put("projectName", ConfigReaderUtils.getProperty("project.name"));
+        browserstackOptions.put("buildName", ConfigReaderUtils.getProperty("build.name"));
+        browserstackOptions.put("userName", ConfigReaderUtils.getProperty("bs.username"));
+        browserstackOptions.put("accessKey", ConfigReaderUtils.getProperty("bs.access.key"));
 
         capabilities.setCapability("bstack:options", browserstackOptions);
-        capabilities.setCapability("platformName", "android");
-        capabilities.setCapability("platformVersion", "9.0");
-        capabilities.setCapability("deviceName", "Samsung Galaxy S10e");
-        capabilities.setCapability("app", "bs://bee1bd37757fac99f54a629797eb2e1bac9c994f");
+        capabilities.setCapability("platformName", ConfigReaderUtils.getProperty("bs.platform.name"));
+        capabilities.setCapability("platformVersion", ConfigReaderUtils.getProperty("bs.platform.version"));
+        capabilities.setCapability("deviceName", ConfigReaderUtils.getProperty("bs.device.name"));
+        capabilities.setCapability("app", ConfigReaderUtils.getProperty("bs.app.url"));
 
-        URL url = new URL("http://hub-cloud.browserstack.com/wd/hub");
+        URL url = new URL(ConfigReaderUtils.getProperty("bs.url"));
         driver = new AppiumDriver(url, capabilities); // Not a RemoteWebDriver!!!
-//        driver = new AndroidDriver(url, capabilities);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
     }
 
